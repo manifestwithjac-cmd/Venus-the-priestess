@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0a0705" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italiana&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#0a0705;
@@ -17,10 +17,33 @@
     --gold-deep:#c9922f;
     --gold-light:#f8e9c1;
     --cream:#fdf6e7;
-    --veil:rgba(253,246,231,.62);
-    --display:"Italiana","Cormorant Garamond",Georgia,serif;
-    --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+    --veil:rgba(253,246,231,.76);
+    --display:"Seriously Nostalgic Serif","Bodoni Moda",Didot,"Bodoni 72",Georgia,serif;
+    --serif:"Seriously Nostalgic Serif","Bodoni Moda",Didot,Georgia,"Times New Roman",serif;
     --sans:"Jost",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+
+  /*
+    Seriously Nostalgic Serif by Nicky Laatz is a licensed typeface, so the files
+    are not shipped here. Drop the woff2 (or otf) into /fonts using the names
+    below and it takes over everywhere automatically. Until then the page renders
+    in Bodoni Moda, the closest free match. See fonts/README.md.
+  */
+  @font-face{
+    font-family:"Seriously Nostalgic Serif";
+    src:url("fonts/SeriouslyNostalgic-Regular.woff2") format("woff2"),
+        url("fonts/SeriouslyNostalgic-Regular.otf") format("opentype");
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:"Seriously Nostalgic Serif";
+    src:url("fonts/SeriouslyNostalgic-Italic.woff2") format("woff2"),
+        url("fonts/SeriouslyNostalgic-Italic.otf") format("opentype");
+    font-weight:400;
+    font-style:italic;
+    font-display:swap;
   }
 
   *{box-sizing:border-box}
@@ -220,7 +243,8 @@
     margin:0 auto;
     max-width:30ch;
     color:var(--veil);
-    font-size:clamp(15px,1.5vw,18px);
+    font-size:clamp(16px,1.6vw,19px);
+    line-height:1.85;
   }
 
   /* ----- mantra ----- */
@@ -235,13 +259,40 @@
     line-height:1.3;
     letter-spacing:.03em;
     margin:0 auto;
-    max-width:16ch;
-    background:linear-gradient(180deg,#fff6dd 0%,#e8c877 55%,#b9832c 100%);
+    max-width:none;
+    background:linear-gradient(100deg,
+      #c9922f 0%, #e0bb6c 18%, #f2d99b 34%,
+      #fffaf0 47%, #ffffff 50%, #fffaf0 53%,
+      #f2d99b 66%, #e0bb6c 82%, #c9922f 100%);
+    background-size:280% 100%;
+    background-position:118% 50%;
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
 
+  /* the light travels across the mantra the moment she scrolls it into view */
+  .mantra.lit p{
+    animation:
+      mantra-strike 3.2s cubic-bezier(.22,.61,.25,1) .45s forwards,
+      mantra-drift 13s ease-in-out 4.1s infinite;
+  }
+
+  @keyframes mantra-strike{
+    from{background-position:118% 50%}
+    to{background-position:-18% 50%}
+  }
+
+  @keyframes mantra-drift{
+    0%,100%{background-position:-18% 50%}
+    50%{background-position:34% 50%}
+  }
+
+  .mantra.lit p.whisper{animation:none}
+
+  .mantra p span{display:block}
+
   .mantra p.whisper{
     max-width:none;
+    background:none;
     font-family:var(--sans);
     font-weight:300;
     font-size:clamp(10px,1.6vw,12px);
@@ -281,7 +332,7 @@
     font-weight:200;
     font-size:11px;
     letter-spacing:.11em;
-    color:rgba(253,246,231,.34);
+    color:rgba(253,246,231,.42);
     max-width:46ch;
     margin:20px auto 0;
     line-height:1.9;
@@ -295,6 +346,7 @@
     *,*::before,*::after{animation:none !important;transition:none !important}
     .sigil,.eyebrow,.wordmark,.subword,.rule,.creed{opacity:1 !important;transform:none !important}
     .veil-in{opacity:1;transform:none}
+    .mantra p{background-position:42% 50%}
   }
 </style>
 </head>
@@ -382,7 +434,7 @@
   </section>
 
   <section class="mantra veil-in">
-    <p>It is already mine. It always was.</p>
+    <p><span>It is already mine.</span><span>It always was.</span></p>
     <p class="whisper">Venus is in the room</p>
   </section>
 
